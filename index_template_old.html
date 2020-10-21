@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+   <head>
+
+  <style type="text/css"> 
+  body{
+    background-image: url("http://associacioader.com/img/parallax/fondo_04.png"); 
+  } 
+.color_naranja_24_bold{
+  color:#FB6C16;
+  font-size: 24px;
+  font-weight: bold;
+}
+.color_naranja_12_bold{
+  color:#FB6C16;
+  font-size: 12px;
+  font-weight: bold;
+}
+.color_naranja_14_bold{
+  color:#FB6C16;
+  font-size: 14px;
+  font-weight: bold;
+}
+.color_naranja_28_bold{
+  color:#FB6C16;
+  font-size: 28px;
+  font-weight: bold;
+}
+.color_naranja_32_bold{
+  color:#FB6C16;
+  font-size: 32px;
+  font-weight: bold;
+}
+.color_amarillo_14_bold{
+  color:#FBEE16;
+  font-size: 14px;
+  font-weight: bold;
+}
+.color_blanco_12{
+  color:#FFFFFF;
+  font-size: 12px;
+  font-weight: bold;
+  text-decoration: none;
+}
+.color_blanco_14{
+  color:#FFFFFF;
+  font-size: 14px;
+}
+.color_blanco_14_bold{
+  color:#FFFFFF;
+  font-size: 14px;
+  font-weight: bold;
+}
+.color_blanco_18{
+  color:#F7F5F5;
+  font-size: 18px;
+  font-weight: bold;
+}
+.color_blanco_24{
+  color:#DDDCDB;
+  font-size: 24px;
+  font-weight: bold;
+}
+.color_blanco_32_bold{
+  color:#FFFFFF;
+  font-size: 32px;
+  font-weight: bold;
+}
+.color_negro{
+  color:#000000;
+  font-size: 16px;
+  font-weight: bold;
+}
+.logo1{
+    text-align: center;
+}
+</style>  
+      <script type="text/javascript">
+         var sock = null;
+         var ellog = null;
+         
+         window.onload = function() {
+            var wsuri;
+            
+            ellog = document.getElementById('log');
+            hblink_table = document.getElementById('hblink');
+            confbridge_table = document.getElementById('bridge');
+            
+            wsuri = "ws://" + window.location.hostname + ":9000";
+
+            
+            if ("WebSocket" in window) {
+               sock = new WebSocket(wsuri);
+            } else if ("MozWebSocket" in window) {
+               sock = new MozWebSocket(wsuri);
+            } else {
+               log("Browser does not support WebSocket!");
+            }
+            
+            if (sock) {
+               sock.onopen = function() {
+                  log("Connected to " + wsuri);
+               }
+               sock.onclose = function(e) {
+                  log("Connection closed (wasClean = " + e.wasClean + ", code = " + e.code + ", reason = '" + e.reason + "')");
+                  hblink_table.innerHTML = "";
+                  confbridge_table.innerHTML = "";
+                  sock = null;
+               }
+               sock.onmessage = function(e) {
+                   var opcode = e.data.slice(0,1);
+                   var message = e.data.slice(1);
+                   if (opcode == "d") {
+                       hblink(message);
+                   } else if (opcode == "b") {
+                       confbridge(message);
+                   } else if (opcode == "l") {
+                       log(message);
+                   } else if (opcode == "q") {
+                       log(message);
+                       hblink_table.innerHTML = "";
+                       confbridge_table.innerHTML = "";
+                   } else {
+                       log("Unknown Message Received: " + message);
+                   }
+               }
+            }
+         };
+         
+         function hblink(_msg) {
+             hblink_table.innerHTML = _msg;
+         };
+         
+         function confbridge(_msg) {
+             confbridge_table.innerHTML = _msg;
+         };
+         
+         function log(_msg) {
+            ellog.innerHTML += _msg + '\n';
+            ellog.scrollTop = ellog.scrollHeight;
+         };
+         
+      </script>
+
+<!-- <style type="text/css"> 
+body{
+    background-image: url("http://associacioader.com/img/parallax/fondo_02.png"); } 
+</style>
+ -->
+   </head>
+    <body style="font: 10pt arial, sans-serif">
+              <h1 class="logo1"><a href="http://associacioader.com/">
+     <img src="http://associacioader.com/img/Logo_Ader.png" alt="" width="180" /></a></h1>
+         <h1 class="color_blanco_32_bold"><center>Dashboard HBlink de EA3EG</center></h1></center></h3>
+         <hr>
+         <noscript>You must enable JavaScript</noscript>
+         <style>table, td, th {border: .5px solid black; padding: 2px; border-collapse: collapse; text-align:center;}</style>
+         <p id="hblink"></p>
+         <p id="bridge"></p>
+         <hr>
+         <h3 class="color_blanco_14_bold">Call Log Window:</h3>
+         <pre id="log" style="height: 10em; overflow-y: scroll; color: #0C9305; background-color: #000000;"></pre>
+
+    <hr>
+    <center class="color_blanco_14" >
+    Copyright (c) 2016, 2017, 2018<br>The Founding Members of the K0USY Group. All rights reserved.</center>
+
+     <center class="color_naranja_14_bold" >
+    Interfaz PHP adaptado by EA3EIZ.</center>
+    </body>
+</html>

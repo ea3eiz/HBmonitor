@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+     <link rel="shortcut icon" href="favicon.png">
+<style type="text/css">
+
+.color_blanco_roto_12_bold{
+  color:#EFEBE9;
+  font: 12pt arial, sans-serif;
+  font-weight: bold;
+}
+.color_blanco_roto_10{
+  background: #FF6000
+  color:#EFEBE9;
+  font: 10pt arial, sans-serif;
+}
+.color_naranja_24_bold{
+  color:#FB6C16;
+  font-size: 24px;
+  font-weight: bold;
+}
+.color_naranja_12_bold{
+  color:#FB6C16;
+  font-size: 12px;
+  font-weight: bold;
+}
+.color_naranja_14_bold{
+  color:#FB6C16;
+  font-size: 14px;
+  font-weight: bold;
+}
+.color_naranja_28_bold{
+  color:#FB6C16;
+  font-size: 28px;
+  font-weight: bold;
+}
+.color_naranja_32_bold{
+  color:#FB6C16;
+  font-size: 32px;
+  font-weight: bold;
+}
+.color_amarillo_14_bold{
+  color:#FBEE16;
+  font-size: 14px;
+  font-weight: bold;
+}
+.color_blanco_12{
+  color:#FFFFFF;
+  font-size: 12px;
+  font-weight: bold;
+  text-decoration: none;
+}
+.color_blanco_14{
+  color:#FFFFFF;
+  font-size: 14px;
+}
+.color_blanco_14_bold{
+  color:#FFFFFF;
+  font-size: 14px;
+  font-weight: bold;
+}
+.color_blanco_18_bold{
+  color:#FFFFFF;
+  font-size: 18px;
+  font-weight: bold;
+}
+.color_blanco_24{
+  color:#DDDCDB;
+  font-size: 24px;
+  font-weight: bold;
+}
+.color_blanco_32_bold{
+  color:#FFFFFF;
+  font-size: 32px;
+  font-weight: bold;
+}.color_negro{
+  color:#000000;
+  font-size: 16px;
+  font-weight: bold;
+}
+.color_negro_14_bold{
+  color:#000000;
+  font-size: 14px;
+  font-weight: bold;
+}
+.logo1{
+    text-align: center;
+}
+</style>
+</head>
+<body>
+<!-- <hr>
+<h3 class="color_blanco_18_bold">Bridge Group Status Tables:</h3>
+{% for _bridge, _bridge_data in _table.iteritems() %} -->
+<table style="table-layout:fixed;width:100%; font: 10pt arial, sans-serif">
+    <tr style="font: 10pt arial, sans-serif; background-color:#0F80FF; color:#FFFFFF">
+        <th style='width: 20%;'>Systemx</th>
+        <th style='width: 10%;'>Slot</th>
+        <th style='width: 19%;'>TGID</th>
+        <th style='width: 15%;'>Status</th>
+        <th style='width: 10%;'>Timeout</th>
+        <th style='width: 11%;'>Rimeout Action</th>
+        <th style='width: 10%;'>Connect TGIDs</th>
+        <th style='width: 15%;'>Disconnect TGIDs</th>
+    </tr>
+    {% for system, _system_data in _table[_bridge].iteritems() %}
+    <tr>
+        <td style="font: 11pt arial, sans-serif;color:#000000;font-weight:bold">{{ system }}</td>
+        <td>{{ _table[_bridge][system]['TS'] }}</td>
+        <td>{{ _table[_bridge][system]['TGID'] }}</td>
+        <td style="background-color:#{{ _table[_bridge][system]['BGCOLOR'] }}; color:#{{ _table[_bridge][system]['COLOR'] }}">{{ _table[_bridge][system]['ACTIVE'] }}</td>
+        <td>{{ _table[_bridge][system]['EXP_TIME'] }}</td>
+        <td>{{ _table[_bridge][system]['TO_ACTION'] }}</td>
+        <td>{{ _table[_bridge][system]['TRIG_ON'] }}</td>
+        <td>{{ _table[_bridge][system]['TRIG_OFF'] }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<!-- {% endfor %} -->
+</body>
+</html>
